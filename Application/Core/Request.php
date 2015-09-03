@@ -28,12 +28,12 @@ class Core_Request
 		$this->method = strtolower($class_info[2]);
 		//　Smartyを初期化
 		// インスタンス生成
-		$this->objSmarty = new Smarty();
-		// ディレクトリを指定
-		$this->objSmarty->compile_dir = SMARTY_COMPIlE_DIR;
-		$this->objSmarty->cache_dir = SMARTY_CACHE_PATH;
-		// ディレクトリの指定(引数とかでなんとかする)
-		$this->objSmarty->template_dir = '/var/www/html/Application/View/' . $this->class_name;
+		// $this->objSmarty = new Smarty();
+		// // ディレクトリを指定
+		// $this->objSmarty->compile_dir = SMARTY_COMPIlE_DIR;
+		// $this->objSmarty->cache_dir = SMARTY_CACHE_PATH;
+		// // ディレクトリの指定(引数とかでなんとかする)
+		// $this->objSmarty->template_dir = '/var/www/html/Application/View/' . $this->class_name;
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Core_Request
 	 */
 	public function desplay()
 	{
-		//　viewを表示
-		$this->objSmarty->display($this->method . '.tpl');
+		//　viewを表示 一旦
+		// $this->objSmarty->display($this->method . '.tpl');
 	}
 }

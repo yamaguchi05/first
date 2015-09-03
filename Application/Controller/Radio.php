@@ -12,6 +12,7 @@ class Controller_Radio
 		var_dump('ラジオをきく');
 		// テンプレート変数の設定
 		// コントローラーで呼び出すにはどうすればいいか
+		
 		// $this->objSmarty->assign('message', 'nikorinpana!');
 
 	}

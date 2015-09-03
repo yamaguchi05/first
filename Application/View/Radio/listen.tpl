@@ -1,7 +1,6 @@
 <html>
 <body>
-<h4>listen</h4>
-{$message}
-<p>hibiki</p>
+<h3>listen</h3>
+<h4>{$message}</h4>
 </body>
 </html>
