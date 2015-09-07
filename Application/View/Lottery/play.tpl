@@ -26,20 +26,23 @@
           </tr>
         </thead>
         <tbody>
-        <!-- foreach -->
+        {foreach from=$tantou key=idx item=val}
+          {if $idx is even}
           <tr>
-            <td>2015/01/01</td>
-            <td>カラムの内容</td>
-            <td>カラムの内容</td>
-            <td>カラムの内容</td>
+            <td>{$tantou.$idx.3}</td>
+            <td>{$tantou.$idx.2}</td>
+            <td>{$tantou.$idx.0}</td>
+            <td>{$tantou.$idx.1}</td>
           </tr>
+          {else}
           <tr class="info">
-            <td>2015/02/01</td>
-            <td>カラムの内容</td>
-            <td>カラムの内容</td>
-            <td>カラムの内容</td>
+            <td>{$tantou.$idx.3}</td>
+            <td>{$tantou.$idx.2}</td>
+            <td>{$tantou.$idx.0}</td>
+            <td>{$tantou.$idx.1}</td>
           </tr>
-        <!-- foreachしめ -->
+          {/if}
+        {/foreach}
         </tbody>
       </table>
     </div>

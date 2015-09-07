@@ -9,6 +9,7 @@ class Controller_Lottery
 	 */
 	public function __construct()
 	{
+		date_default_timezone_set('Asia/Tokyo');
 		//　Smartyを初期化
 		// インスタンス生成
 		$this->objSmarty = new Smarty();
@@ -28,6 +29,9 @@ class Controller_Lottery
 		shuffle($users);
 		// 結果を入れる配列
 		$tantou = array();
+		//日付情報
+		$start_date = '2015-09-10';
+		$date ='';
 
 		// 担当者を取りだす
 		foreach ($name_orders as $key => $val) {
@@ -45,9 +49,6 @@ class Controller_Lottery
 
 			//司会者と担当者が被った場合
 			if (in_array($name_orders[$key], $tantou[$key]) === true) {
-
-	// echo($name_orders[$key].'さん');
-	// echo(司会者と担当者がかぶったぞい);
 				//司会者と担当者が被ったとのことなので、
 				//担当者2名のどっちかを判定($name_orders[$key])、array_shiftで再度ひく
 				if (strcmp($tantou[$key][0], $name_orders[$key]) === 0 ){
@@ -58,18 +59,29 @@ class Controller_Lottery
 				}
 				// 司会者と担当者が被った人を$usersにもどす
 				$users[] = $name_orders[$key];
-
 			}
+
+			// 司会者情報も担当配列に代入
+			$tantou[$key][2] = $name_orders[$key];
+
+			//$keyが0（1回目）の場合は、$start_dayを代入
+			if (strcmp($key, '0') === 0) {
+				$tantou[$key][3] = $start_date;
+				$date = $start_date;
+			}else{
+				//　1週間先を表すので、2週目以降は、1週間後
+				$tantou[$key][3] = date("Y-m-d",strtotime("+1 week" ,strtotime($date)));
+				$date = $tantou[$key][3];
+			}
+
 		}
-		// var_dump($tantou);
-        $this->objSmarty->assign('tantou', $tantou);
-        $this->objSmarty->assign('name_orders', $name_orders);
+		$this->objSmarty->assign('tantou', $tantou);
 	}
 
-    /**
-     * デストラクタ
-     */
-    function __destruct() {
-        $this->objSmarty->display('play.tpl');
-    }
+	/**
+	 * デストラクタ
+	 */
+	function __destruct() {
+		$this->objSmarty->display('play.tpl');
+	}
 }
