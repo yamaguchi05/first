@@ -6,22 +6,11 @@ class Controller_Radio
 {
 	/**
 	 * ラジオをきく
+	 * @param object $objSmarty　Smartyのインスタンス
 	 */
-	public function listen()
+	public function listen($objSmarty)
 	{
-		var_dump('ラジオをきく');
 		// テンプレート変数の設定
-		// コントローラーで呼び出すにはどうすればいいか
-		
-		// $this->objSmarty->assign('message', 'nikorinpana!');
-
-	}
-
-	/**
-	 * ラジオを探す
-	 */
-	public function find()
-	{
-		var_dump('ラジオを探す');
+		$objSmarty->assign('message', 'LoveLive!');
 	}
 }

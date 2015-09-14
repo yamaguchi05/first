@@ -2,12 +2,22 @@
 
 require_once(SMARTY_PATH . 'smarty-3.1.24/libs/Smarty.class.php');
 
+/**
+ * ルーティングやディスパッチを行う
+ */
 class Core_Request
 {
+	/**
+	 * リクエストURL : クラス名
+	 * @var int
+	 */
+	const INDEX_CLASS = 1;
 
-	// private $request_url = '';
-	// 登録していなくても、$this->request_urlで使えるのはなぜか
-	// 「$this->xx」でクラス変数を設定できるのか?
+	/**
+	 * リクエストURL : メソッド名
+	 * @var int
+	 */
+	const INDEX_METHOD = 2;
 
 	/**
 	 * コンストラクタ
@@ -18,46 +28,42 @@ class Core_Request
 	}
 
 	/**
-	 * viewの初期化を行う
+	 * URLからの解析やviewの初期化を行う
+	 * ルーティング:URLからファイルの名前を取得する（整形する）処理
 	 */
 	public function setup()
 	{
 		// ルーティング
 		$class_info = explode('/', $this->request_url);
-		$this->class_name = ucfirst(strtolower($class_info[1]));
-		$this->method = strtolower($class_info[2]);
-		//　Smartyを初期化
-		// インスタンス生成
-		// $this->objSmarty = new Smarty();
-		// // ディレクトリを指定
-		// $this->objSmarty->compile_dir = SMARTY_COMPIlE_DIR;
-		// $this->objSmarty->cache_dir = SMARTY_CACHE_PATH;
-		// // ディレクトリの指定(引数とかでなんとかする)
-		// $this->objSmarty->template_dir = '/var/www/html/Application/View/' . $this->class_name;
+		$this->class_name = ucfirst(strtolower($class_info[self::INDEX_CLASS]));
+		$this->method = strtolower($class_info[self::INDEX_METHOD]);
+		// Smartyを初期化
+		$this->objSmarty = new Smarty();
+		$this->objSmarty->compile_dir = SMARTY_COMPIlE_DIR;
+		$this->objSmarty->cache_dir = SMARTY_CACHE_PATH;
+		$this->objSmarty->template_dir = VIEW_PATH . $this->class_name;
 	}
 
 	/**
 	 * URLからの解析や振り分けを行う
 	 *
-	 * ルーティング:URLからファイルの名前を取得する（整形する）処理
 	 * ディスパッチ:ルーティング後、そのファイルに遷移（振分）する処理
 	 */
 	public function dispatch()
 	{
 		$class = 'Controller_' . $this->class_name;
 		$method = $this->method;
-
 		// ディスパッチ
 		$instance = new $class();
-		$instance->$method();
+		$instance->$method($this->objSmarty);
 	}
 
 	/**
-	 * view読み込みを行う
+	 * viewの読み込みを行う
 	 */
-	public function desplay()
+	public function display()
 	{
-		//　viewを表示 一旦
-		// $this->objSmarty->display($this->method . '.tpl');
+		// viewを表示
+		$this->objSmarty->display($this->method . '.tpl');
 	}
 }

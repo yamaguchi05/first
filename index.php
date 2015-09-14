@@ -12,10 +12,10 @@ require_once(CORE_PATH . 'AutoLoader.php');
 // オートローダー
 Core_AutoLoader::setup();
 
-// ルーティング、ディスパッチ、　viewの初期化など
+// ルーティング、ディスパッチなど
 $request = new Core_Request();
 $request->setup();
 $request->dispatch();
-$request->desplay();
+$request->display();
 
 exit;
