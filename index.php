@@ -16,6 +16,5 @@ Core_AutoLoader::setup();
 $request = new Core_Request();
 $request->setup();
 $request->dispatch();
-$request->display();
 
 exit;

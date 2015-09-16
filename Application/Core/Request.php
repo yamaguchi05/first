@@ -28,8 +28,8 @@ class Core_Request
 	}
 
 	/**
-	 * URLからの解析やviewの初期化を行う
-	 * ルーティング:URLからファイルの名前を取得する（整形する）処理
+	 * URLの解析を行う
+	 * ルーティング:URLからファイルの名前を取得する（整形する）
 	 */
 	public function setup()
 	{
@@ -37,17 +37,11 @@ class Core_Request
 		$class_info = explode('/', $this->request_url);
 		$this->class_name = ucfirst(strtolower($class_info[self::INDEX_CLASS]));
 		$this->method = strtolower($class_info[self::INDEX_METHOD]);
-		// Smartyを初期化
-		$this->objSmarty = new Smarty();
-		$this->objSmarty->compile_dir = SMARTY_COMPIlE_DIR;
-		$this->objSmarty->cache_dir = SMARTY_CACHE_PATH;
-		$this->objSmarty->template_dir = VIEW_PATH . $this->class_name;
 	}
 
 	/**
-	 * URLからの解析や振り分けを行う
-	 *
-	 * ディスパッチ:ルーティング後、そのファイルに遷移（振分）する処理
+	 * URLから振り分けを行う
+	 * ディスパッチ:任意のファイルに遷移（振り分け）する
 	 */
 	public function dispatch()
 	{
@@ -56,14 +50,5 @@ class Core_Request
 		// ディスパッチ
 		$instance = new $class();
 		$instance->$method($this->objSmarty);
-	}
-
-	/**
-	 * viewの読み込みを行う
-	 */
-	public function display()
-	{
-		// viewを表示
-		$this->objSmarty->display($this->method . '.tpl');
 	}
 }

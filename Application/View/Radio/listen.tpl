@@ -23,7 +23,7 @@
           <tr>
             <td>毎週水曜</td>
             <td>にこりんぱな</td>
-            <td>にこ・りん・ぱな</td>
+            <td>{$mc}</td>
             <td>{$message}</td>
           </tr>
         </tbody>

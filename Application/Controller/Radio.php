@@ -2,15 +2,14 @@
 /**
  * ラジオコントローラー
  */
-class Controller_Radio
+class Controller_Radio extends Controller_Base
 {
 	/**
 	 * ラジオをきく
-	 * @param object $objSmarty　Smartyのインスタンス
 	 */
-	public function listen($objSmarty)
+	public function listen()
 	{
-		// テンプレート変数の設定
-		$objSmarty->assign('message', 'LoveLive!');
+		Controller_Base::assign('mc', '矢沢先輩、りん、はなよ');
+		Controller_Base::assign('message', 'LoveLive!');
 	}
 }
