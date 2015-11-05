@@ -11,13 +11,13 @@ class Core_Request
 	 * リクエストURL : クラス名
 	 * @var int
 	 */
-	const INDEX_CLASS = 1;
+	const INDEX_CLASS = 2;
 
 	/**
 	 * リクエストURL : メソッド名
 	 * @var int
 	 */
-	const INDEX_METHOD = 2;
+	const INDEX_METHOD = 3;
 
 	/**
 	 * コンストラクタ

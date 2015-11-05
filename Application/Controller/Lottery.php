@@ -84,7 +84,7 @@ class Controller_Lottery
 	 * @param array $name_orders 名前順配列
 	 * @param string $start_date 基準となる開催日付
 	 */
-	private function static tantou_array_create($users, $name_orders, $start_date)
+	private function tantou_array_create($users, $name_orders, $start_date)
 	{
 		$date ='';
 		$tantou = array();
